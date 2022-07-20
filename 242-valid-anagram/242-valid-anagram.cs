@@ -1,23 +1,23 @@
-public class Solution {
-    public bool IsAnagram(string s, string t) {
-        if(s.Length != t.Length) return false;
-        int Index;
-        foreach(char ch in s)
-        {
+// public class Solution {
+//     public bool IsAnagram(string s, string t) {
+//         if(s.Length != t.Length) return false;
+//         int Index;
+//         foreach(char ch in s)
+//         {
             
-            if(t.Contains(ch))
-            {
-                Index = t.IndexOf(ch,0);
-                t   = t.Remove(Index,1);
-            }
-            else return false;
-        }
-        return true;
+//             if(t.Contains(ch))
+//             {
+//                 Index = t.IndexOf(ch,0);
+//                 t   = t.Remove(Index,1);
+//             }
+//             else return false;
+//         }
+//         return true;
         
 
-    }
-}
-/*
+//     }
+// }
+
 public class Solution
 {
     public bool IsAnagram(string s, string t) 
@@ -34,13 +34,12 @@ public class Solution
         {
             if(dict.ContainsKey(i))
             {
-                
-                if(dict[i]==0)  dict.Remove(i); 
                 dict[i]--;
+                if(dict[i]==0)  dict.Remove(i); 
+                
             }
             else  return false; 
         }
         return dict.Count == 0;
     }
 }
-*/
