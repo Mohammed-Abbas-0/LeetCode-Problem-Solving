@@ -1,28 +1,41 @@
 public class Solution {
-    public int LongestValidParentheses(string s) {
-         Stack<int> stack = new Stack<int>();
- stack.Push(-1);
- int maxLength = 0;
- for(int i = 0; i < s.Length; i++)
- {
-     if (s[i] == '(')
-     {
-         stack.Push(i);
-     }
-     else
-     {
-         stack.Pop();
-         if (stack.Count > 0)
-         {
-             int currentLength = i - stack.Peek();
-             maxLength = Math.Max(maxLength, currentLength);
-         }
-         else
-         {
-             stack.Push(i);
-         }
-     }
- }
- return maxLength;
+  public int LongestValidParentheses(string s)
+{
+    int left = 0, right = 0, maxLength = 0;
+
+    // left → right
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (s[i] == '(') left++;
+        else right++;
+
+        if (left == right)
+        {
+            maxLength = Math.Max(maxLength, 2 * right);
+        }
+        else if (right > left)
+        {
+            left = right = 0;
+        }
     }
+
+    // right → left
+    left = right = 0;
+    for (int i = s.Length - 1; i >= 0; i--)
+    {
+        if (s[i] == '(') left++;
+        else right++;
+
+        if (left == right)
+        {
+            maxLength = Math.Max(maxLength, 2 * left);
+        }
+        else if (left > right)
+        {
+            left = right = 0;
+        }
+    }
+
+    return maxLength;
+}
 }
