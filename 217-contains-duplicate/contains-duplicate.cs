@@ -1,3 +1,4 @@
+
 public class Solution {
     public bool ContainsDuplicate(int[] nums) {
         HashSet<int> seen = new();
