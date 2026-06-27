@@ -1,13 +1,12 @@
 public class Solution {
     public int MaxProfit(int[] prices) {
-        int minPrice = prices[0]; 
-        int maxProfit = 0;  
+        int minBuy = prices[0],maxProfit = 0;
         for(int i = 0; i < prices.Length; i++)
         {
-            minPrice = Math.Min(prices[i],minPrice);
-            maxProfit = Math.Max(prices[i] - minPrice, maxProfit);
+            minBuy = Math.Min(prices[i],minBuy);
+            maxProfit = Math.Max(prices[i] - minBuy,maxProfit);
         }
+        return  maxProfit;
 
-        return maxProfit;
     }
 }
