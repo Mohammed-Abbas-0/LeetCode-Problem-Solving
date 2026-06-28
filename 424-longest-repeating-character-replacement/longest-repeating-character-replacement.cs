@@ -1,17 +1,20 @@
 public class Solution {
     public int CharacterReplacement(string s, int k) {
-        Dictionary<char, int> count = new();
+        int[] count = new int[26];
         int left = 0, maxCount = 0, maxSize = 0;
-        for(int i =0; i < s.Length; i++)
+        
+        for(int i = 0; i < s.Length; i++)
         {
-           if(count.ContainsKey(s[i]))
-                count[s[i]]++;
-            else
-                count[s[i]] = 1;
-            maxCount = Math.Max(maxCount, count[s[i]]);
+            // ١. ضيف الحرف الجديد
+            count[s[i] - 'A']++;
+            
+            // ٢. حدّث أكتر حرف متكرر
+            maxCount = Math.Max(maxCount, count[s[i] - 'A']);
+            
+            // ٣. لو محتاج تغير أكتر من k → صغّر الـ window
             if(i - left + 1 - maxCount > k)
             {
-                count[s[left]]--;
+                count[s[left] - 'A']--;
                 left++;
             }
             
