@@ -1,74 +1,51 @@
 public class Solution {
 
-public int NumIslands(char[][] grid)
-{
-    if (grid == null || grid.Length == 0)
+    public int NumIslands(char[][] grid)
+    {
+        if (grid == null || grid.Length == 0)
         return 0;
 
-    int rows = grid.Length;
-    int cols = grid[0].Length;
+            int rows = grid.Length;
+            int cols = grid[0].Length;
 
-    int islandCount = 0;
+            int max_col = cols-1;
+            int max_row = rows-1;
 
-    Stack<(int row, int col)> stack = new();
+            int islandCount = 0; 
 
-    for (int row = 0; row < rows; row++)
-    {
-        for (int col = 0; col < cols; col++)
-        {
-            // Find a new island
-            if (grid[row][col] == '1')
-            {
-                islandCount++;
+                    Queue<(int, int)> q = new();
+            for(int i = 0; i < rows; i++){
+                for(int j = 0; j < cols; j++){
+                     if (grid[i][j] == '1'){
+                        islandCount++;
+                        q.Enqueue((i,j));
+                        while(q.Count > 0){
+                           var (r, c) = q.Dequeue();
 
-                // Mark as visited
-                grid[row][col] = '0';
+if (grid[r][c] == '1')
+{
+    grid[r][c] = '2';
 
-                // Start DFS
-                stack.Push((row, col));
+    if (r > 0)
+        q.Enqueue((r - 1, c));
 
-                while (stack.Count > 0)
-                {
-                    var current = stack.Pop();
+    if (r < max_row)
+        q.Enqueue((r + 1, c));
 
-                    int r = current.row;
-                    int c = current.col;
+    if (c > 0)
+        q.Enqueue((r, c - 1));
 
-                    // UP
-                    if (r > 0 && grid[r - 1][c] == '1')
-                    {
-                        grid[r - 1][c] = '0';
-                        stack.Push((r - 1, c));
-                    }
+    if (c < max_col)
+        q.Enqueue((r, c + 1));
+} 
+                        }
 
-                    // DOWN
-                    if (r < rows - 1 && grid[r + 1][c] == '1')
-                    {
-                        grid[r + 1][c] = '0';
-                        stack.Push((r + 1, c));
-                    }
-
-                    // LEFT
-                    if (c > 0 && grid[r][c - 1] == '1')
-                    {
-                        grid[r][c - 1] = '0';
-                        stack.Push((r, c - 1));
-                    }
-
-                    // RIGHT
-                    if (c < cols - 1 && grid[r][c + 1] == '1')
-                    {
-                        grid[r][c + 1] = '0';
-                        stack.Push((r, c + 1));
-                    }
+                        
+                     }
                 }
-            }
-        }
+            }        
+
+        return islandCount;
     }
-
-    return islandCount;
-}
- 
-
-    
+  
 }
