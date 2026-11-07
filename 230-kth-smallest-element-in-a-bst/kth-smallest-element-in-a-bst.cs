@@ -12,24 +12,24 @@
  * }
  */
 public class Solution {
-    private int count = 0;
-    private int result;
+    private int result = 0;
+        private int count = 0;
+
     public int KthSmallest(TreeNode root, int k)
     {
-        Inorder(root, k);
-        return result;
+       InorderPattern(root, k);
+       return result;
     }
    
+   private void InorderPattern(TreeNode root,int k)
+   {
 
-    private void Inorder(TreeNode root,int k)
-    {
-        if (root == null) return;
+     if(root == null) return;
+     InorderPattern( root.left, k); // left
+     count++;
+     if(count == k) result = root.val;
+     InorderPattern( root.right, k); //right
+   }
 
-        Inorder(root.left,k);
-
-        count++;
-        if(k == count)
-            result = root.val;
-        Inorder(root.right,k);
-    }
+    
 }
