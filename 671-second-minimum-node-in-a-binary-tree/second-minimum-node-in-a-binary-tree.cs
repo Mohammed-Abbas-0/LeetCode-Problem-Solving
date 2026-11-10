@@ -29,8 +29,8 @@ public class Solution
 
             return;
         }
-
-        DFS(root.left);
         DFS(root.right);
+        DFS(root.left);
+       
     }
 }
