@@ -1,25 +1,27 @@
 public class Solution {
     public bool CheckString(string s) {
-        bool everyAappersBeforeB = true,bExisting = false;
-        int firstB = 0,lastA = 0;
-        for(int i =0; i < s.Length; i++)
+
+        int firstB = -1;
+        int lastA = -1;
+
+        for (int i = 0; i < s.Length; i++)
         {
-            if(s[i] == 'b'){
+            if (s[i] == 'b')
+            {
                 firstB = i;
-                bExisting = true;
                 break;
             }
         }
-        for(int i =s.Length-1; i > 0; i--)
+
+        for (int i = s.Length - 1; i >= 0; i--)
         {
-            if(s[i] == 'a'){
+            if (s[i] == 'a')
+            {
                 lastA = i;
                 break;
             }
         }
 
-        if(firstB < lastA && bExisting)
-            return false;
-        return everyAappersBeforeB;
+        return firstB == -1 || lastA == -1 || firstB > lastA;
     }
 }
